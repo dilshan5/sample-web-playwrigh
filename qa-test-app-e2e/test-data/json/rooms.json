@@ -1,0 +1,61 @@
+{
+    "rooms": [
+      {
+        "roomid": 1,
+        "roomName": "101",
+        "type": "single",
+        "accessible": true,
+        "image": "https://www.mwtestconsultancy.co.uk/img/testim/room2.jpg",
+        "description": "Aenean porttitor mauris sit amet lacinia molestie. In posuere accumsan aliquet. Maecenas sit amet nisl massa. Interdum et malesuada fames ac ante.",
+        "features": [
+          "Seperate bathroom",
+          "WiFi",
+          "Free parking"
+        ],
+        "roomPrice": 100
+      },
+      {
+        "roomid": 1,
+        "roomName": "101",
+        "type": "Family",
+        "accessible": true,
+        "image": "https://www.amstelhotel.com/wp-content/uploads/2021/04/Room306Angle1.jpg",
+        "description": "Aenean porttitor mauris sit amet lacinia molestie. In posuere accumsan aliquet. Maecenas sit amet nisl massa. Interdum et malesuada fames ac ante.",
+        "features": [
+          "Washing machine",
+          "WiFi",
+          "Safe",
+          "Free cot"
+        ],
+        "roomPrice": 100
+      },
+      {
+        "roomid": 1,
+        "roomName": "101",
+        "type": "Twin",
+        "accessible": true,
+        "image": "https://www.amstelhotel.com/wp-content/uploads/2021/04/AmstelHotel-rm201-Details5.jpg",
+        "description": "Aenean porttitor mauris sit amet lacinia molestie. In posuere accumsan aliquet. Maecenas sit amet nisl massa. Interdum et malesuada fames ac ante.",
+        "features": [
+          "TV",
+          "Indoor pool",
+          "Free Breakfast"
+        ],
+        "roomPrice": 100
+      },
+      {
+        "roomid": 1,
+        "roomName": "101",
+        "type": "Double",
+        "accessible": true,
+        "image": "https://image-tc.galaxy.tf/wijpeg-48oi6c0yre5uorm4k7mnowscc/br996b-1.jpg?width=1920",
+        "description": "Aenean porttitor mauris sit amet lacinia molestie. In posuere accumsan aliquet. Maecenas sit amet nisl massa. Interdum et malesuada fames ac ante.",
+        "features": [
+          "TV",
+          "WiFi",
+          "Elevator avilable"
+        ],
+        "roomPrice": 100
+      }
+    ]
+  }

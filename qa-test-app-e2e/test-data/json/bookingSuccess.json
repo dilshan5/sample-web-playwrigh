@@ -1,0 +1,12 @@
+{
+    "bookingdates": {
+      "checkin": "2024-02-17",
+      "checkout": "2024-02-19"
+    },
+    "depositpaid": false,
+    "firstname": "Nicholas",
+    "lastname": "Perera",
+    "roomid": 1,
+    "email": "saman@gmail.com",
+    "phone": "1234567898086"
+  }
