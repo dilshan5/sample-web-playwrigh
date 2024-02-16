@@ -12,6 +12,10 @@ interface BookingData {
 export class BookingRoom {
     constructor(private page: Page) {}
 
+    /**
+     * 
+     * @param bookingData Booking information
+     */
     async fillInBookingDetails(bookingData: BookingData){
         await this.page.locator('div.row.hotel-room-info')
         .filter({hasText: bookingData.specialFeature})
