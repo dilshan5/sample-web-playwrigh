@@ -46,6 +46,33 @@ test.describe('Sample test suite for Network Intercept ', () => {
     await networkInterceptor.InterceptRequest(urlToIntercept,filePath);
 
     await bookingRoomPage.submit();
+
+    expect(bookingRoomPage.verifySuccessMessage).toBeTruthy;
+  });
+
+
+  test('Check the error message when the room is already booked ', async ({ page, bookingRoomPage, networkInterceptor }) => {
+    await page.goto('');
+    await page.getByRole('button', { name: 'Let me hack!' }).click();
+    
+    await bookingRoomPage.fillInBookingDetails({
+      specialFeature: 'Safe',
+      firstname: 'Nicholas',
+      lastname: 'Perera',
+      email: 'saman@gmail.com',
+      phone: '1234567898086',
+    });
+
+    /**
+     * Intercept the booking response for validate conflicts error message
+     */
+    var filePath = '../test-data/json/bookingConflicts.json'
+    var urlToIntercept = 'https://automationintesting.online/booking/'; 
+    await networkInterceptor.InterceptResponseWithError(urlToIntercept, 409, filePath) 
+
+    await bookingRoomPage.submit();
+
+    expect(bookingRoomPage.verfyErrorMessage('The room dates are either invalid or are already booked for one or more of the dates that you have selected.')).toBeTruthy;
   });
 
 });

@@ -1,4 +1,5 @@
 import { Page } from "@playwright/test";
+import { expect } from '@playwright/test';
 
 interface BookingData {
     specialFeature?: string;
@@ -31,6 +32,14 @@ export class BookingRoom {
 
     async submit() {
         await this.page.getByRole('button', { name: 'Book', exact: true }).click();
-      }
+    }
+
+    async verfyErrorMessage(errorMessage: string) {
+       return await expect(this.page.locator('div.alert.alert-danger')).toContainText(errorMessage);
+    }
+
+    async verifySuccessMessage() {
+        return await expect(this.page.locator('div.ReactModal__Content.ReactModal__Content--after-open.confirmation-modal')).toContainText('Booking Successful!');
+     }
 
 }
