@@ -6,17 +6,22 @@ export class NetworkInterceptor {
   constructor(private page: Page) { }
   /**
    * 
-   * @param urlToIntercept Response URL which need to Intecept
-   * @param filePath relative path for the Json body
+   * @param urlToIntercept Response URL which need to Mock
+   * @param options [filePath] relative path for the Json response body
+   * @param options [statusCode] Mock response status code 
    */
-  async InterceptResponseBody(urlToIntercept: any, filePath: string) {
-    var newResponseBody = readJsonFile(filePath);
+  async interceptResponse(urlToIntercept: string, options?: { filePath?: string, statusCode?: number }) {
+    var newResponseBody = readJsonFile(options.filePath);
 
     await this.page.route(urlToIntercept, async (route) => {
       console.log('Intercepted response:', route.request().url());
+      // Make the original request
+      const response = await route.fetch();
+      // if mock response code is unavialble, then use the original response code
+      const mockResponsecode = (typeof options.statusCode !== 'undefined') ? options.statusCode : Number(response.status)
       // Replace the response with the modified data
       route.fulfill({
-        status: 200,
+        status: mockResponsecode,
         headers: {
           'Content-Type': 'application/json',
         },
@@ -26,27 +31,10 @@ export class NetworkInterceptor {
   }
   /**
    * 
-   * @param urlToIntercept Response URL which need to Intecept
-   * @param errorcode Response Error code 
-   * @param filePath relative path for the Json body
+   * @param urlToIntercept Request URL which need to intercept
+   * @param filePath relative path for the Json request body
    */
-  async InterceptResponseWithError(urlToIntercept: any, errorcode: number, filePath: string) {
-    var newResponseBody = readJsonFile(filePath);
-
-    await this.page.route(urlToIntercept, async (route) => {
-      console.log('Intercepted response:', route.request().url());
-      // Replace the response with the modified data
-      route.fulfill({
-        status: errorcode,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(newResponseBody),
-      });
-    });
-  }
-
-  async InterceptRequest(urlToIntercept: any, filePath: string) {
+  async interceptRequest(urlToIntercept: string, filePath: string) {
     var newRequestBody = readJsonFile(filePath);
 
     await this.page.route(urlToIntercept, async (route) => {
@@ -59,6 +47,11 @@ export class NetworkInterceptor {
   }
 }
 
+/**
+ * 
+ * @param filePath  relative location of the json file
+ * @returns JSON Object
+ */
 function readJsonFile(filePath: string) {
   const rawData = fs.readFileSync(path.resolve(__dirname, filePath), 'utf-8');
   return JSON.parse(rawData);

@@ -14,7 +14,6 @@ test.describe('Sample test suite for Network Intercept ', () => {
       email: 'saman@gmail.com',
       phone: '1234567898086',
     });
-
     await bookingRoomPage.submit();
   });
 
@@ -25,11 +24,10 @@ test.describe('Sample test suite for Network Intercept ', () => {
      */
     var filePath = '../test-data/json/rooms.json'
     var urlToIntercept = 'https://automationintesting.online/room/';
-    networkInterceptor.InterceptResponseBody(urlToIntercept, filePath);
+    networkInterceptor.interceptResponse(urlToIntercept, { filePath })
 
     await page.goto('');
     await page.getByRole('button', { name: 'Let me hack!' }).click();
-
     await bookingRoomPage.fillInBookingDetails({
       specialFeature: 'Free cot',
       firstname: 'Nicholas',
@@ -43,7 +41,7 @@ test.describe('Sample test suite for Network Intercept ', () => {
      */
     var filePath = '../test-data/json/bookingSuccess.json'
     var urlToIntercept = 'https://automationintesting.online/booking/';
-    networkInterceptor.InterceptRequest(urlToIntercept, filePath);
+    networkInterceptor.interceptResponse(urlToIntercept, { filePath })
 
     await test.step('Click on Submit button"', async () => {
       await Promise.all([
@@ -51,7 +49,6 @@ test.describe('Sample test suite for Network Intercept ', () => {
         bookingRoomPage.submit(),
       ]);
     });
-
     expect(bookingRoomPage.verifySuccessMessage).toBeTruthy;
   });
 
@@ -73,7 +70,7 @@ test.describe('Sample test suite for Network Intercept ', () => {
      */
     var filePath = '../test-data/json/bookingConflicts.json'
     var urlToIntercept = 'https://automationintesting.online/booking/';
-    networkInterceptor.InterceptResponseWithError(urlToIntercept, 409, filePath)
+    networkInterceptor.interceptResponse(urlToIntercept, { filePath, statusCode: 409 })
 
     await test.step('Click on Submit button"', async () => {
       await Promise.all([
@@ -81,7 +78,6 @@ test.describe('Sample test suite for Network Intercept ', () => {
         bookingRoomPage.submit(),
       ]);
     });
-
     expect(bookingRoomPage.verfyErrorMessage('The room dates are either invalid or are already booked for one or more of the dates that you have selected.')).toBeTruthy;
   });
 
