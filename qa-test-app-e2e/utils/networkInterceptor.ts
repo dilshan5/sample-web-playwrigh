@@ -31,11 +31,12 @@ export class NetworkInterceptor {
   }
   /**
    * 
-   * @param urlToIntercept Request URL which need to intercept
-   * @param filePath relative path for the Json request body
+   * @param urlToIntercept 
+   * @param options [filePath] relative path for the Json request body
+   * @param options [statusCode] Mock request status code 
    */
-  async interceptRequest(urlToIntercept: string, filePath: string) {
-    var newRequestBody = readJsonFile(filePath);
+  async interceptRequest(urlToIntercept: string, options?: { filePath?: string, statusCode?: number }) {
+    var newRequestBody = readJsonFile(options.filePath);
 
     await this.page.route(urlToIntercept, async (route) => {
       console.log('Intercepted request:', route.request().url());

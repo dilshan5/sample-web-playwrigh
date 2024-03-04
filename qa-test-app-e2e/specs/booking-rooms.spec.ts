@@ -41,7 +41,7 @@ test.describe('Sample test suite for Network Intercept ', () => {
      */
     var filePath = '../test-data/json/bookingSuccess.json'
     var urlToIntercept = 'https://automationintesting.online/booking/';
-    networkInterceptor.interceptResponse(urlToIntercept, { filePath })
+    networkInterceptor.interceptRequest(urlToIntercept, { filePath })
 
     await test.step('Click on Submit button"', async () => {
       await Promise.all([
