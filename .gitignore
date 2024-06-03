@@ -1,5 +1,14 @@
 node_modules/
-/test-results/
-/playwright-report/
 /blob-report/
 /playwright/.cache/
+test-results/
+playwright-report/
+.idea/
+test-output/
+dist/
+.DS_Store
+*/.DS_Store
+*.txt
+*.png
+.vscode
+package-lock.json

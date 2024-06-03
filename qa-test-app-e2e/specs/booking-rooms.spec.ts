@@ -1,6 +1,19 @@
 import { expect } from '@playwright/test';
 import { test } from '../fixtures/test';
 
+test.use({
+  launchOptions: {
+    headless: true,
+      args: [
+          '--no-sandbox',
+          '--allow-file-access-from-files',
+          '--use-fake-ui-for-media-stream',
+          '--use-fake-device-for-media-stream',
+          '--use-file-for-fake-video-capture=./data/fakeIds/valid-passport.y4m',
+      ],
+  }
+});
+
 test.describe('Sample test suite for Network Intercept ', () => {
 
   test('Book a room with Safety is highlighted', async ({ page, bookingRoomPage, networkInterceptor }) => {
